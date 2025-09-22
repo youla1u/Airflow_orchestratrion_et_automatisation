@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+    ports: ["9000:9000", "9001:9001"]
+
+  airflow:
+    image: apache/airflow:2.9.2
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/airflow.db
+      DUCKDB_PATH: /opt/airflow/duckdb/data.duckdb
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    depends_on: [minio]
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./sql:/opt/airflow/sql
+      - ./duckdb:/opt/airflow/duckdb
+    ports: ["8080:8080"]
+    command: >
+      bash -lc "
+        pip install -r /opt/airflow/dags/../requirements.txt &&
+        airflow db migrate &&
+        airflow users create --username admin --password admin --firstname a --lastname a --role Admin --email a@a.a || true &&
+        airflow webserver & airflow scheduler
+      "

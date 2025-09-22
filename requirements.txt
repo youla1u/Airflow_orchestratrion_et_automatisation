@@ -1,0 +1,6 @@
+apache-airflow==2.9.2
+apache-airflow-providers-slack
+pandas
+requests
+duckdb>=0.10
+pyarrow
