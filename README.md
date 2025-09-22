@@ -14,7 +14,7 @@ L’objectif est de montrer comment construire un **workflow ETL moderne** avec 
 - **Transformation** : agrégations journalières dans `mart.weather_daily`.  
 - **Qualité des données** : contrôles de nulls, valeurs aberrantes et plages de validité.  
 - **Export** : sauvegarde quotidienne au format CSV dans un bucket S3/MinIO via DuckDB `COPY ... TO`.  
-- **Orchestration** : DAG Airflow avec dépendances, retries et gestion des erreurs.  
+- **Orchestration** : DAG Airflow avec dépendances, retries et gestion des erreurs.   
 - **Notifications** : intégration Slack optionnelle.  
 
 ---
