@@ -18,13 +18,3 @@ L’objectif est de montrer comment construire un **workflow ETL moderne** avec 
 - **Notifications** : intégration Slack optionnelle.  
 
 ---
-
-## Architecture
-
-```mermaid
-flowchart TD
-    A[Extract API Open-Meteo] --> B[DuckDB raw.weather_readings]
-    B --> C[Transform -> mart.weather_daily]
-    C --> D[Data Quality Checks]
-    D --> E[Export CSV -> MinIO S3 Bucket]
-    E --> F[Notification Slack/Logs]
