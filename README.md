@@ -3,7 +3,6 @@
 Ce projet est un **pipeline de données orchestré avec Airflow** qui illustre un cas concret de **data engineering**.  
 Il ingère des données météo depuis une API publique, les stocke dans **DuckDB**, applique des transformations SQL, vérifie la qualité, puis exporte les résultats vers **MinIO (S3)**.  
 
-L’objectif est de montrer comment construire un **workflow ETL moderne** avec des technologies légères et open source.
 
 ---
 
